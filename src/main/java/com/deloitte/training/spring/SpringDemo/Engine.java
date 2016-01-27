@@ -1,6 +1,13 @@
 package com.deloitte.training.spring.SpringDemo;
 
-public class Engine {
+import org.springframework.stereotype.Component;
+
+@Component
+public interface Engine {
            
+	
+	String getType();
+
+	
 	
 }

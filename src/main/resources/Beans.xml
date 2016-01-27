@@ -1,10 +1,48 @@
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+    http://www.springframework.org/schema/context  
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">  
+   
+    <context:annotation-config/>
+    <context:component-scan base-package="com.deloitte.training.spring.SpringDemo" />  
+
+
+	<!--  for AOP -->
+    <aop:aspectj-autoproxy />
+	<!-- Aspect -->
+	<bean id="logAspect" class="com.deloitte.training.spring.SpringDemo.aop.LoggingAspect" />
 
 	<bean id="helloBean" class="com.deloitte.training.spring.SpringDemo.Car">
-		<property name="name" value="Porche" />
+		
+		<constructor-arg value="Porche" />
+		<property name="tyres">
+			<list>						
+				<ref bean="front"/>
+				<ref bean="rear"/>
+			</list>		
+		</property>	
 	</bean>
+	
+	<bean id="front" class="com.deloitte.training.spring.SpringDemo.Tyre">
+		<property name="position" value="Front"></property>
+	</bean>
+	
+	<bean id="rear" class="com.deloitte.training.spring.SpringDemo.Tyre">
+		<property name="position" value="Rear"></property>
+	</bean> 
+		
+	
+	<!-- <bean id="engine" class="com.deloitte.training.spring.SpringDemo.Engine">
+		 
+		
+	</bean>--> 
+	
+	
 
 </beans>
